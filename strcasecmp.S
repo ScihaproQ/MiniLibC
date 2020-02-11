@@ -1,24 +1,40 @@
 BITS 64
 SECTION .text
-GLOBAL asm_strcmp
+GLOBAL asm_strcasecmp
 
-asm_strcmp:
+asm_strcasecmp:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx
     xor     r8, r8
     xor     r9, r9
-    xor     r10, r10
 
 loop:
-    cmp     BYTE[rdi + rcx], 0
-    je      return
-    cmp     BYTE[rsi + rcx], 0
-    je      return
     mov     r8b, BYTE[rdi + rcx]
     mov     r9b, BYTE[rsi + rcx]
-    sub     r8, r9
-    cmp     r8, 0
+    cmp     r8b, 0
+    je      return
+    cmp     r9b, 0
+    je      return
+    jmp     set_first
+
+set_first:
+    cmp     r8b, 0x61
+    jl     set_second
+    cmp     r8b, 0x7A
+    jg     set_second
+    sub     r8b, 0x20
+
+set_second:
+    cmp     r9b, 0x61
+    jge     compare
+    cmp     r9b, 0x7A
+    jle     compare
+    sub     r9b, 0x20
+    jmp     compare
+
+compare:
+    cmp     r8, r9
     jne     return
     inc     rcx
     jmp     loop
