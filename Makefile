@@ -12,6 +12,7 @@ SRCS	= ./strlen.S \
         ./memmove.S \
         ./strncmp.S \
         ./strcasecmp.S \
+        ./rindex.S \
 
 OBJS	= $(SRCS:.S=.o)
 
@@ -26,6 +27,7 @@ $(NAME):
 	 $(NSM) ./memmove.S
 	 $(NSM) ./strncmp.S
 	 $(NSM) ./strcasecmp.S
+	 $(NSM) ./rindex.S
 	 gcc -o $(NAME) main.c $(OBJS)
 
 clean:
