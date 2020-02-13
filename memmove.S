@@ -1,8 +1,8 @@
 BITS 64
 SECTION .text
-GLOBAL asm_memmove
+GLOBAL memmove
 
-asm_memmove:
+memmove:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx

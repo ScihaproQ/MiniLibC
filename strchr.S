@@ -1,8 +1,8 @@
 BITS 64
 SECTION .text
-GLOBAL asm_strchr
+GLOBAL strchr
 
-asm_strchr:
+strchr:
     push    rbp
     mov     rbp, rsp
     xor     rax, rax

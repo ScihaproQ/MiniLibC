@@ -1,8 +1,8 @@
 BITS 64
 SECTION .text
-GLOBAL asm_strcmp
+GLOBAL strcmp
 
-asm_strcmp:
+strcmp:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx

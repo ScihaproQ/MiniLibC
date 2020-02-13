@@ -1,8 +1,8 @@
 BITS 64
 SECTION .text
-GLOBAL asm_strlen
+GLOBAL strlen
 
-asm_strlen:
+strlen:
     push    rbp
     mov     rbp, rsp
     xor     rax, rax

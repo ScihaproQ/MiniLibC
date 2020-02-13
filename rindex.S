@@ -1,8 +1,8 @@
 BITS 64
 SECTION .text
-GLOBAL asm_rindex
+GLOBAL rindex
 
-asm_rindex:
+rindex:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx

@@ -1,8 +1,8 @@
 BITS 64
 SECTION .text
-GLOBAL asm_memcpy
+GLOBAL memcpy
 
-asm_memcpy:
+memcpy:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx

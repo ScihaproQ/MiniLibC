@@ -1,8 +1,8 @@
 BITS 64
 SECTION .text
-GLOBAL asm_memset
+GLOBAL memset
 
-asm_memset:
+memset:
     push    rbp
     mov     rbp, rsp
     xor     rax, rax
