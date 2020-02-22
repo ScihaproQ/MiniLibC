@@ -28,7 +28,7 @@ $(NAME):
 	 $(NSM) ./strncmp.S
 	 $(NSM) ./strcasecmp.S
 	 $(NSM) ./rindex.S
-	 gcc -shared -o $(NAME) $(OBJS)
+	 gcc -nostdlib -shared -o $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)

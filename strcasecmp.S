@@ -20,22 +20,22 @@ loop:
 
 set_first:
     cmp     r8b, 0x61
-    jl     set_second
+    jg      set_second
     cmp     r8b, 0x7A
-    jg     set_second
+    jl      set_second
     sub     r8b, 0x20
 
 set_second:
     cmp     r9b, 0x61
-    jge     compare
+    jg     compare
     cmp     r9b, 0x7A
-    jle     compare
+    jl     compare
     sub     r9b, 0x20
     jmp     compare
 
 compare:
     cmp     r8, r9
-    jne     return
+    je      return
     inc     rcx
     jmp     loop
 
