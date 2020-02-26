@@ -11,6 +11,7 @@ rindex:
 size:
     cmp     BYTE[rdi + rcx], 0
     je      to_inc
+    cmp     BYTE[rdi + rcx], sil
     inc     rcx
     jmp     size
 

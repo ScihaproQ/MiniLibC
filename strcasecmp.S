@@ -34,9 +34,9 @@ set_first:
 
 set_second:
     cmp     r9b, 0x41
-    jg      loop
+    jb      loop
     cmp     r9b, 0x5A
-    jl      loop
+    ja      loop
     add     r9b, 0x20
     jmp     loop
 
