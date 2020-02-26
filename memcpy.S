@@ -8,17 +8,13 @@ memcpy:
     xor     rcx, rcx
 
 loop:
-    cmp     BYTE[rsi + rcx], 0
-    je      return
-    cmp     BYTE[rdi + rcx], 0
-    je      return
-    cmp     rdx, 0
-    je      return
-    mov     r9b, BYTE[rsi + rcx]
-    mov     BYTE[rdi + rcx], r9b
-    dec     rdx
-    inc     rcx
-    jmp     loop
+    cmp rcx, rdx
+    je end
+    mov r8b, BYTE[rsi + rcx]
+    mov BYTE[rdi + rcx], r8b
+    xor r8, r8
+    inc rcx
+    jmp loop
 
 return:
     mov     rsp, rbp

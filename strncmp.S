@@ -11,16 +11,15 @@ strncmp:
     xor     r10, r10
 
 loop:
+    cmp     rdx, 0
+    je      return
     cmp     BYTE[rdi + rcx], 0
     je      return
     cmp     BYTE[rsi + rcx], 0
     je      return
-    cmp     rdx, 0
-    je      return
     mov     r8b, BYTE[rdi + rcx]
     mov     r9b, BYTE[rsi + rcx]
-    sub     r8, r9
-    cmp     r8, 0
+    cmp     r8, r9
     jne     return
     inc     rcx
     dec     rdx
