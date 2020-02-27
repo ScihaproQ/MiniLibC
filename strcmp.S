@@ -31,3 +31,25 @@ return:
     mov     rsp, rbp
     pop     rbp
     ret
+
+
+asm_rindex:
+    push rbp
+    mov rbp, rsp
+    xor rcx, rcx
+    xor rax, rax
+block:
+    cmp byte [rdi], 0
+    je end
+    cmp byte [rdi], sil
+    je char_founded
+second_block:
+    inc rdi
+    jmp block
+end:
+    mov rsp, rbp
+    pop rbp
+    ret
+char_founded:
+    mov rax, rdi
+    jmp second_block

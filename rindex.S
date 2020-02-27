@@ -5,25 +5,22 @@ GLOBAL rindex
 rindex:
     push    rbp
     mov     rbp, rsp
-    xor     rcx, rcx
-    xor     r8, r8
 
 size:
-    cmp     BYTE[rdi + rcx], 0
-    je      to_inc
-    cmp     BYTE[rdi + rcx], sil
-    inc     rcx
-    jmp     size
+    cmp     BYTE[rdi], 0
+    je      return
+    cmp     BYTE[rdi], sil
+    je      found
 
 to_inc:
-    cmp     BYTE[rdi + rcx], sil
-    je      return
-    dec     rcx
-    jmp     to_inc
+    inc     rdi
+    jmp     size
 
 return:
-    mov     rax, rdi
-    add     rax, rcx
     mov     rsp, rbp
     pop     rbp
     ret
+
+found:
+    mov     rax, rdi
+    jmp     to_inc

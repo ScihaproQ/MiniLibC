@@ -19,7 +19,8 @@ loop:
     je      return
     mov     r8b, BYTE[rdi + rcx]
     mov     r9b, BYTE[rsi + rcx]
-    cmp     r8, r9
+    sub     r8, r9
+    cmp     r8, 0
     jne     return
     inc     rcx
     dec     rdx
