@@ -2,27 +2,32 @@ BITS 64
 SECTION .text
 GLOBAL strstr
 
-rindex:
+strstr:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx
-    xor     r8, r8
 
-size:
-    cmp     BYTE[rdi + rcx], 0
-    je      to_inc
+loop:
+    cmp     BYTE[rdi], 0
+    je      exit
+    xor     rcx, rcx
+    jmp     compare
+
+compare:
+    cmp     BYTE[rsi + rcx], 0
+    je      exit
+    mov     r8b, BYTE[rdi + rcx]
+    cmp     r8b, BYTE[rsi + rcx]
+    jne     inc
     inc     rcx
-    jmp     size
+    jmp     compare
 
-to_inc:
-    cmp     BYTE[rdi + rcx], sil
-    je      return
-    dec     rcx
-    jmp     to_inc
+inc:
+    inc     rdi
+    jmp     loop
 
-return:
+exit:
     mov     rax, rdi
-    add     rax, rcx
     mov     rsp, rbp
     pop     rbp
     ret
