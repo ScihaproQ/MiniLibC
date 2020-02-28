@@ -8,19 +8,25 @@ rindex:
 
 size:
     cmp     BYTE[rdi], 0
-    je      return
+    je      check
     cmp     BYTE[rdi], sil
     je      found
 
-to_inc:
+check:
+    cmp     sil, 0
+    je      return
+    ret
+
+inc:
     inc     rdi
     jmp     size
 
 return:
+    mov     rax, rdi
     mov     rsp, rbp
     pop     rbp
     ret
 
 found:
     mov     rax, rdi
-    jmp     to_inc
+    jmp     inc
