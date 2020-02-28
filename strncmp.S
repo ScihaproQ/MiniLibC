@@ -23,7 +23,6 @@ loop:
     cmp     r8, 0
     jne     return
     inc     rcx
-    dec     rdx
     jmp     loop
 
 return:
