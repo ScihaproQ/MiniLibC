@@ -6,10 +6,12 @@ strstr:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx
+    xor     r8, r8
+    xor     rax, rax
 
 loop:
     cmp     BYTE[rdi], 0
-    je      exit
+    je      ext
     xor     rcx, rcx
     jmp     compare
 
@@ -25,6 +27,12 @@ compare:
 inc:
     inc     rdi
     jmp     loop
+
+ext:
+    mov     rax, 0
+    mov     rsp, rbp
+    pop     rbp
+    ret
 
 exit:
     mov     rax, rdi

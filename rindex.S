@@ -12,8 +12,6 @@ loop:
     je      check
     cmp     BYTE[rdi], sil
     je      found
-
-inc:
     inc     rdi
     jmp     loop
 
@@ -30,4 +28,5 @@ return:
 
 found:
     mov     rax, rdi
-    jmp     inc
+    inc     rdi
+    jmp     loop
