@@ -15,6 +15,7 @@ SRCS	= ./strlen.S \
         ./rindex.S \
         ./strstr.S \
         ./strpbrk.S \
+        ./strcspn.S \
 
 OBJS	= $(SRCS:.S=.o)
 
@@ -32,6 +33,7 @@ $(NAME):
 	 $(NSM) ./rindex.S
 	 $(NSM) ./strstr.S
 	 $(NSM) ./strpbrk.S
+	 $(NSM) ./strcspn.S
 	 gcc -nostdlib -shared -o $(NAME) $(OBJS)
 
 clean:

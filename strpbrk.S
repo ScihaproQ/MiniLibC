@@ -2,7 +2,7 @@ BITS 64
 SECTION .text
 GLOBAL  strpbrk
 
-strpbk:
+strpbrk:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx
