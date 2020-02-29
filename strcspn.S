@@ -6,29 +6,29 @@ strcspn:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx
-    xor     r9, r9
+    xor     rdx, rdx
+    xor     r8, r8
 
 loop:
-    cmp     BYTE[rdi], 0
+    xor     rcx, rcx
+    mov     r8b, BYTE[rdi + rdx]
+    cmp     r8b, 0
     je      return
-    jmp     find
+
+block:
+    cmp     BYTE[rsi + rcx], 0
+    je      inc
+    cmp     r8b, BYTE[rsi + rcx]
+    je      return
+    inc     rcx
+    jmp     block
 
 inc:
-    inc     rdi
+    inc     rdx
     jmp     loop
 
 return:
-    mov     rax, r9
+    mov     rax, rdx
     mov     rsp, rbp
     pop     rbp
     ret
-
-find:
-    mov     r8b, BYTE[rsi + rcx]
-    cmp     r8, 0
-    je      inc
-    cmp     BYTE[rdi], r8b
-    je      return
-    inc     rcx
-    inc     r9
-    jmp     find
