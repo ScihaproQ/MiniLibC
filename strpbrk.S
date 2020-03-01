@@ -6,42 +6,37 @@ strpbrk:
     push    rbp
     mov     rbp, rsp
     xor     rcx, rcx
-    xor     rax, rax
     xor     r8, r8
 
 loop:
-    cmp     BYTE[rsi], 0
+    mov     al, BYTE[rdi + rcx]
+    cmp     al, 0
     je      exit
-    xor     rcx, rcx
-    mov     r8b, BYTE[rsi]
-
-find:
-    cmp     BYTE[rdi + rcx], 0
-    je      inc
-    cmp     BYTE[rdi + rcx], r8b
-    je      inc_rdi
-    inc     rcx
+    xor     r8, r8
     jmp     find
 
 inc:
-    inc     rsi
+    inc     rcx
     jmp     loop
 
-inc_rdi:
-    cmp     rcx, 0
+find:
+    mov     dl, BYTE[rsi + r8]
+    cmp     dl, 0
+    je      inc
+    cmp     al, dl
     je      return
-    inc     rdi
-    dec     rcx
-    jmp     inc_rdi
+    inc     r8
+    jmp     find
 
 exit:
     mov     rax, 0
     mov     rsp, rbp
-    pop     rsp
+    pop     rbp
     ret
 
 return:
     mov     rax, rdi
+    add     rax, rcx
     mov     rsp, rbp
     pop     rbp
     ret

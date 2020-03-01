@@ -11,7 +11,7 @@ strncmp:
     xor     r10, r10
 
 loop:
-    cmp     rdx, 0
+    cmp     rdx, rcx
     je      return
     cmp     BYTE[rdi + rcx], 0
     je      return

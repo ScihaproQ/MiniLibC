@@ -3,30 +3,37 @@ SECTION .text
 GLOBAL rindex
 
 rindex:
-    push    rbp
-    mov     rbp, rsp
-    xor     rax, rax
+    push        rbp
+    mov         rbp, rsp
+    xor         rcx, rcx
+    jmp         find
+
+inc:
+    inc         rcx
+
+find:
+    mov         dl, BYTE[rdi + rcx]
+    cmp         dl, 0
+    jne         inc
+    jmp         loop
+
+dec:
+    cmp         rcx, 0
+    je          end
+    dec         rcx
 
 loop:
-    cmp     BYTE[rdi], 0
-    je      check
-    cmp     BYTE[rdi], sil
-    je      found
-    inc     rdi
-    jmp     loop
+	movsx       edx, BYTE [rdi + rcx]
+	cmp         edx, esi
+	jne         dec
+	mov         rax, rdi
+	add         rax, rcx
+	jmp         return
 
-check:
-    cmp     sil, 0
-    je      return
-    ret
+end:
+    xor         rax, rax
 
 return:
-    mov     rax, rdi
-    mov     rsp, rbp
-    pop     rbp
+    mov         rsp, rbp
+    pop         rbp
     ret
-
-found:
-    mov     rax, rdi
-    inc     rdi
-    jmp     loop
